@@ -19,7 +19,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         private void PizzaSeeder()
         {
-            PizzaModel newPizza = new PizzaModel("Margherita", "La classica pizza napoletana", "pizza-margherita.jfif", 5.99F);
+            PizzaModel newPizza = new PizzaModel("Margherita", "La classica pizza margherita napoletana", "pizza-margherita.jfif", 5.99F);
             _pizzeria_db.Add(newPizza);
             _pizzeria_db.SaveChanges();
 
