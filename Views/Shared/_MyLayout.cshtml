@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/la_mia_pizzeria_static.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <header>
+        @Html.Partial("_MyHeader")
+    </header>
+
+    <div class="mx-5">
+        @RenderBody()
+    </div>
+
+    <footer>
+        @Html.Partial("_MyFooter")
+    </footer>
+</body>
+</html>

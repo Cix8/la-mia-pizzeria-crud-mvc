@@ -1,0 +1,74 @@
+﻿@{
+    //1.
+    string name = "Francesco";
+    string surname = "Natale";
+
+    //2.
+    int MySum(int n) {
+        int result = 0;
+        while(n >= 1) {
+            result += n;
+            n--;
+        }
+        return result;
+    }
+
+    //3.
+    string sentence = "nel mezzo del cammin di nostra vita";
+    int charCounter = 0;
+    for(int i = 0; i<sentence.Length; i++) {
+        if(sentence[i] == 'a') {
+            charCounter++;
+        }
+    }
+
+    //4.
+    Random rand = new Random();
+    List<int> intList = new List<int>();
+    while(intList.Count < 20) {
+        intList.Add(rand.Next(1, 91));
+    }
+
+    //5
+    string formattedDate = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+    //6
+    DateTime currentDate = DateTime.Now;
+    string sevenDaysAgo = currentDate.AddDays(-7).ToString("yyyy-MM-dd");
+    string currentDayOfWeek = currentDate.ToString("dddd");
+    string dayOfWeekOneYearLater = currentDate.AddYears(1).ToString("dddd");
+
+    ViewData["Title"] = "Esercizi";
+}
+
+<h2>(Ex. 1) Nome e cognome: @name @surname</h2>
+
+<span>(Ex. 2) Somma: @MySum(3)</span>
+
+<p>(Ex. 3) Nella frase @sentence il carattere 'a' è presente @charCounter volte</p>
+
+<span>(Ex. 4) Lunghezza lista = @intList.Count</span>
+<p>Numeri compresi tra 20 e 70:</p>
+<ul>
+    @foreach(int number in intList) {
+        @if(number >= 20 && number <= 70) {
+            <li>@number</li>
+        }
+    }
+</ul>
+
+@*5*@
+<span>(Ex. 5) Data ed ora attuale: @formattedDate</span>
+
+<p>(Ex. 6)</p>
+<ul>
+    <li>
+        <span>a) La data di 7 giorni fa: @sevenDaysAgo</span>
+    </li>
+    <li>
+        <span>b) Giorno corrente della settimana: @currentDayOfWeek</span>
+    </li>
+    <li>
+        <span>c) Giorno della settimana tra un anno esatto: @dayOfWeekOneYearLater</span>
+    </li>
+</ul>

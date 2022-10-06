@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Le nostre Pizze";
+}
+
+@model List<PizzaModel>
+
+<h1 class="text-center py-4">Le nostre Pizze</h1>
+
+@if(Model.Count > 0) {
+    <ul class="list-group flex-row flex-wrap ms-5">
+        @foreach(PizzaModel pizza in Model) {
+            <li class="card my-3 me-3" style="width: 25rem;">
+                @if(pizza.Image.Contains("data:image") || pizza.Image.Contains("http")) {
+                    <img src="@pizza.Image" class="card-img-top" style="height:15rem;">
+                } else {
+                    <img src="~/img/@pizza.Image" class="card-img-top" style="height:15rem;">
+                }
+                <div class="card-body">
+                    <h2 class="card-title">Pizza @pizza.Name</h2>
+                    <span class="d-block pb-3">Prezzo: € @pizza.Price</span>
+                    <a href="@Url.Action("Details", "Pizza", new {id = pizza.Id})" class="btn btn-primary">Visualizza dettaglio pizza</a>
+                </div>
+            </li>
+        }
+    </ul>
+} else {
+    <h2 class="text-center py-3">Siamo spiacenti ma attualmente non è disponibile alcuna pizza... Riprova più tardi</h2>
+}
