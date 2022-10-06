@@ -117,6 +117,23 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            PizzaModel pizza = this.FindBy(id);
+
+            if(pizza != null)
+            {
+                _pizzeria_db.Remove(pizza);
+                _pizzeria_db.SaveChanges();
+                return RedirectToAction("Index");
+            } else
+            {
+                return NotFound("Non siamo riusciti a trovare la pizza che intendi eliminare");
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();

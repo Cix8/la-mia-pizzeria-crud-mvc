@@ -19,6 +19,10 @@
                     <h2 class="card-title">Pizza @pizza.Name</h2>
                     <span class="d-block pb-3">Prezzo: € @pizza.Price</span>
                     <a href="@Url.Action("Details", "Pizza", new {id = pizza.Id})" class="btn btn-primary">Visualizza dettaglio pizza</a>
+                    <form class="d-inline" asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Elimina pizza</button>
+                    </form>
                 </div>
             </li>
         }
