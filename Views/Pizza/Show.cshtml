@@ -18,6 +18,7 @@
     <div class="card-body">
         <h2 class="card-title">Pizza @Model.Name</h2>
         <p class="card-text">Descrizione: @Model.Description</p>
-        <span>Prezzo: € @Model.Price</span>
+        <span class="d-block pb-3">Prezzo: € @Model.Price</span>
+        <a href="@Url.Action("Update", "Pizza", new {id = Model.Id})" class="btn btn-primary">Modifica Pizza</a>
     </div>
 </div>
