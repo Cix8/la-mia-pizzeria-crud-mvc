@@ -25,6 +25,8 @@ namespace la_mia_pizzeria_static.Models
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         [PriceValidation]
         public float Price { get; set; }
+
+        [Required(ErrorMessage = "Il campo è obbligatorio")]
         public int CategoryId { get; set; }
         public CategoryModel? Category { get; set; }
 

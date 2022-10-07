@@ -34,7 +34,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         private void Store(PizzaModel pizza)
         {
-            _pizzeria_db.Add(pizza);
+            _pizzeria_db.Pizzas.Add(pizza);
             _pizzeria_db.SaveChanges();
         }
 
@@ -64,18 +64,22 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            PizzaCategories pizzaCategories = new PizzaCategories();
+            List<CategoryModel> categories = _pizzeria_db.Categories.ToList();
+            pizzaCategories.Categories = categories;
+            return View(pizzaCategories);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PizzaModel model)
+        public IActionResult Create(PizzaCategories model)
         {
             if (!ModelState.IsValid)
             {
+                model.Categories = _pizzeria_db.Categories.ToList();
                 return View("Create", model);
             }
-            this.Store(new PizzaModel(model.Name, model.Description, model.Image, (float)model.Price));
+            this.Store(model.Pizza);
             return RedirectToAction("Index");
         }
 
@@ -83,37 +87,32 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Update(int id)
         {
             PizzaModel thisPizza = this.FindBy(id);
-             if(thisPizza != null)
+            if (thisPizza != null)
             {
-                return View(thisPizza);
-            } else
-            {
-                return NotFound("Non siamo riusciti a trovare la pizza selezionata...");
+                PizzaCategories pizzaCategories = new PizzaCategories();
+                pizzaCategories.Pizza = thisPizza;
+                pizzaCategories.Categories = _pizzeria_db.Categories.ToList();
+                return View(pizzaCategories);
             }
+            return NotFound("Non siamo riusciti a trovare la pizza selezionata...");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, PizzaModel pizza)
+        public IActionResult Update(int id, PizzaCategories model)
         {
-            if(!ModelState.IsValid)
+            model.Pizza.Id = id;
+
+            if (!ModelState.IsValid)
             {
-                return View("Update", pizza);
+                model.Categories = _pizzeria_db.Categories.ToList();
+                return View("Update", model);
             }
 
-            PizzaModel thisPizza = this.FindBy(id);
-            if(thisPizza != null)
-            {
-                thisPizza.Name = pizza.Name;
-                thisPizza.Description = pizza.Description;
-                thisPizza.Image = pizza.Image;
-                thisPizza.Price = pizza.Price;
+            _pizzeria_db.Pizzas.Update(model.Pizza);
 
-                _pizzeria_db.SaveChanges();
-            } else
-            {
-                return NotFound("Non siamo riusciti a trovare la pizza da aggiornare");
-            }
+            _pizzeria_db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
