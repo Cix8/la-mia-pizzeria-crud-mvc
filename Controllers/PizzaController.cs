@@ -47,11 +47,11 @@ namespace la_mia_pizzeria_static.Controllers
         {
             List<PizzaModel> pizzaList = new List<PizzaModel>();
             pizzaList = _pizzeria_db.Pizzas.OrderBy(pizza => pizza.Id).ToList<PizzaModel>();
-            if (pizzaList.Count == 0)
-            {
-                this.PizzaSeeder();
-                pizzaList = _pizzeria_db.Pizzas.OrderBy(pizza => pizza.Id).ToList<PizzaModel>();
-            }
+            //if (pizzaList.Count == 0)
+            //{
+            //    this.PizzaSeeder();
+            //    pizzaList = _pizzeria_db.Pizzas.OrderBy(pizza => pizza.Id).ToList<PizzaModel>();
+            //}
             return View(pizzaList);
         }
 
