@@ -1,6 +1,7 @@
 ﻿using la_mia_pizzeria_static.Models;
 using la_mia_pizzeria_static.MyDbContext;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Diagnostics;
 
@@ -57,7 +58,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Details(int id)
         {
-            PizzaModel thisPizza = this.FindBy(id);
+            PizzaModel thisPizza = _pizzeria_db.Pizzas.Where(pizza => pizza.Id == id).Include("Category").First();
             return View("Show", thisPizza);
         }
 
