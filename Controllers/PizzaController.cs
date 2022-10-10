@@ -91,12 +91,13 @@ namespace la_mia_pizzeria_static.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            PizzaModel thisPizza = this.FindBy(id);
+            PizzaModel thisPizza = _pizzeria_db.Pizzas.Where(pizza => pizza.Id == id).Include("Ingredients").First();
             if (thisPizza != null)
             {
                 PizzaCategories pizzaCategories = new PizzaCategories();
                 pizzaCategories.Pizza = thisPizza;
                 pizzaCategories.Categories = _pizzeria_db.Categories.ToList();
+                pizzaCategories.Ingredients = _pizzeria_db.Ingredients.ToList();
                 return View(pizzaCategories);
             }
             return NotFound("Non siamo riusciti a trovare la pizza selezionata...");
@@ -111,10 +112,20 @@ namespace la_mia_pizzeria_static.Controllers
             if (!ModelState.IsValid)
             {
                 model.Categories = _pizzeria_db.Categories.ToList();
+                model.Ingredients = _pizzeria_db.Ingredients.ToList();
                 return View("Update", model);
             }
 
-            _pizzeria_db.Pizzas.Update(model.Pizza);
+            //model.Pizza.Ingredients = _pizzeria_db.Ingredients.Where(ing => model.selectedIng.Contains(ing.Id)).ToList();
+            //_pizzeria_db.Pizzas.Update(model.Pizza);
+
+            PizzaModel pizza = _pizzeria_db.Pizzas.Where(pizza => pizza.Id == id).Include("Ingredients").First();
+            pizza.Name = model.Pizza.Name;
+            pizza.Description = model.Pizza.Description;
+            pizza.Image = model.Pizza.Image;
+            pizza.Price = model.Pizza.Price;
+            pizza.CategoryId = model.Pizza.CategoryId;
+            pizza.Ingredients = _pizzeria_db.Ingredients.Where(ing => model.selectedIng.Contains(ing.Id)).ToList();
 
             _pizzeria_db.SaveChanges();
 
