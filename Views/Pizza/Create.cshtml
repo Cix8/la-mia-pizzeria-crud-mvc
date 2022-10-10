@@ -42,7 +42,7 @@
     </div>
     <div class="form-check mb-3">
         <span class="form-label">Ingredienti:</span>
-        <select class="form-select" multiple>
+        <select asp-for="selectedIng" class="form-select" multiple>
             @foreach(IngredientModel ingredient in Model.Ingredients) {
                 @if(Model.Pizza.Ingredients.Contains(ingredient)) {
                     <option value="@ingredient.Id" selected>@ingredient.Name</option>

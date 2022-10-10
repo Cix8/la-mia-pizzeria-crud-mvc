@@ -42,5 +42,21 @@ namespace la_mia_pizzeria_static.Models
             Image = image;
             Price = price;
         }
+
+        public string IngToString()
+        {
+            string result = "";
+            for(int i = 0; i < Ingredients.Count; i++)
+            {
+                if(i != (Ingredients.Count - 1))
+                {
+                    result += $"{Ingredients[i].Name}, ";
+                } else
+                {
+                    result += $"{Ingredients[i].Name}";
+                }
+            }
+            return result;
+        }
     }
 }

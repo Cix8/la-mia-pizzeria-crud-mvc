@@ -5,6 +5,7 @@
         public PizzaModel Pizza { get; set; }
         public List<CategoryModel> Categories { get; set; }
         public List<IngredientModel> Ingredients { get; set; }
+        public List<int> selectedIng { get; set; }
         public PizzaCategories()
         {
             Pizza = new PizzaModel();

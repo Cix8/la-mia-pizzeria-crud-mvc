@@ -20,6 +20,7 @@
         <p class="card-text">Descrizione: @Model.Description</p>
         <span class="d-block pb-3">Prezzo: € @Model.Price</span>
         <span class="d-block pb-3">Categoria: @Model.Category.Name</span>
+        <span class="d-block pb-3">Ingredienti: @Model.IngToString()</span>
         <a href="@Url.Action("Update", "Pizza", new {id = Model.Id})" class="btn btn-primary">Modifica Pizza</a>
     </div>
 </div>

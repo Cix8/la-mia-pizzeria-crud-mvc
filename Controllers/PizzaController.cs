@@ -58,7 +58,7 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Details(int id)
         {
-            PizzaModel thisPizza = _pizzeria_db.Pizzas.Where(pizza => pizza.Id == id).Include("Category").First();
+            PizzaModel thisPizza = _pizzeria_db.Pizzas.Where(pizza => pizza.Id == id).Include("Category").Include("Ingredients").First();
             return View("Show", thisPizza);
         }
 
@@ -80,8 +80,10 @@ namespace la_mia_pizzeria_static.Controllers
             if (!ModelState.IsValid)
             {
                 model.Categories = _pizzeria_db.Categories.ToList();
+                model.Ingredients = _pizzeria_db.Ingredients.ToList();
                 return View("Create", model);
             }
+            model.Pizza.Ingredients = _pizzeria_db.Ingredients.Where(ing => model.selectedIng.Contains(ing.Id)).ToList();
             this.Store(model.Pizza);
             return RedirectToAction("Index");
         }
