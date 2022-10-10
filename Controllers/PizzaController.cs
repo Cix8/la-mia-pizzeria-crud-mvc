@@ -67,7 +67,9 @@ namespace la_mia_pizzeria_static.Controllers
         {
             PizzaCategories pizzaCategories = new PizzaCategories();
             List<CategoryModel> categories = _pizzeria_db.Categories.ToList();
+            List<IngredientModel> ingredients = _pizzeria_db.Ingredients.ToList();
             pizzaCategories.Categories = categories;
+            pizzaCategories.Ingredients = ingredients;
             return View(pizzaCategories);
         }
 

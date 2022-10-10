@@ -8,6 +8,7 @@ namespace la_mia_pizzeria_static.MyDbContext
         private string connString = "Data Source=localhost;Initial Catalog = pizzeria_db; Integrated Security = True";
         public DbSet<PizzaModel> Pizzas { get; set; }
         public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<IngredientModel> Ingredients { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

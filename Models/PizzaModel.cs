@@ -29,10 +29,10 @@ namespace la_mia_pizzeria_static.Models
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         public int CategoryId { get; set; }
         public CategoryModel? Category { get; set; }
-
+        public List<IngredientModel> Ingredients { get; set; }
         public PizzaModel()
         {
-
+            Ingredients = new List<IngredientModel>();
         }
 
         public PizzaModel(string name, string description, string image, float price)

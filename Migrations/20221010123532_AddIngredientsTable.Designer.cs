@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using la_mia_pizzeria_static.MyDbContext;
 
@@ -10,9 +11,10 @@ using la_mia_pizzeria_static.MyDbContext;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(Pizzeria))]
-    partial class PizzeriaModelSnapshot : ModelSnapshot
+    [Migration("20221010123532_AddIngredientsTable")]
+    partial class AddIngredientsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
