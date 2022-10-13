@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -12,7 +17,11 @@
 <body>
 
     <header>
-        @Html.Partial("_MyHeader")
+        @if (SignInManager.IsSignedIn(User)) {
+            @Html.Partial("_MyHeader")
+        } else {
+            @Html.Partial("_GuestHeader")
+        }
     </header>
 
     <div class="mx-5">

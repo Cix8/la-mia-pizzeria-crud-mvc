@@ -1,0 +1,25 @@
+﻿@model PizzaModel
+
+@{
+    ViewData["Title"] = $"Pizza {Model.Name}";
+}
+
+<h1 class="text-center py-4">Le nostra Pizza @Model.Name</h1>
+
+<div class="card my-3 mx-auto" style="width: 25rem;">
+    @if (Model.Image.Contains("data:image") || Model.Image.Contains("http"))
+    {
+        <img src="@Model.Image" class="card-img-top" style="height:15rem;">
+    }
+    else
+    {
+        <img src="~/img/@Model.Image" class="card-img-top" style="height:15rem;">
+    }
+    <div class="card-body">
+        <h2 class="card-title">Pizza @Model.Name</h2>
+        <p class="card-text">Descrizione: @Model.Description</p>
+        <span class="d-block pb-3">Prezzo: € @Model.Price</span>
+        <span class="d-block pb-3">Categoria: @Model.Category.Name</span>
+        <span class="d-block">Ingredienti: @Model.IngToString()</span>
+    </div>
+</div>
