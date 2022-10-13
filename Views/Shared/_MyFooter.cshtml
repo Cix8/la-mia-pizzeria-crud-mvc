@@ -1,5 +1,18 @@
-﻿<footer class="border-top footer text-muted">
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+
+<footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2022 - La Mia Pizzeria - <a asp-area="" asp-controller="Guest" asp-action="Index">Home</a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <span>
+                &copy; 2022 - La Mia Pizzeria - <a asp-area="" asp-controller="Pizza" asp-action="Index">Home</a>
+            </span>
+        } else {
+            <span>
+                &copy; 2022 - La Mia Pizzeria - <a asp-area="" asp-controller="Guest" asp-action="Index">Home</a>
+            </span>
+        }
     </div>
 </footer>
