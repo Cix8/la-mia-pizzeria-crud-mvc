@@ -7,6 +7,11 @@ namespace la_mia_pizzeria_static.MyDbContext
 {
     public class Pizzeria : IdentityDbContext<IdentityUser>
     {
+        private string connString = "Data Source=localhost;Initial Catalog = pizzeria_db; Integrated Security = True";
+        public DbSet<PizzaModel> Pizzas { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<IngredientModel> Ingredients { get; set; }
+
         public Pizzeria()
         {
         }
@@ -14,11 +19,6 @@ namespace la_mia_pizzeria_static.MyDbContext
         public Pizzeria(DbContextOptions<Pizzeria> options) : base(options)
         {
         }
-
-        private string connString = "Data Source=localhost;Initial Catalog = pizzeria_db; Integrated Security = True";
-        public DbSet<PizzaModel> Pizzas { get; set; }
-        public DbSet<CategoryModel> Categories { get; set; }
-        public DbSet<IngredientModel> Ingredients { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
