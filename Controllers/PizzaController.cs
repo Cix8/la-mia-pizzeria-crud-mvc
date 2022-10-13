@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_static.Models;
 using la_mia_pizzeria_static.MyDbContext;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +8,7 @@ using System.Diagnostics;
 
 namespace la_mia_pizzeria_static.Controllers
 {
+    [Authorize]
     public class PizzaController : Controller
     {
         private readonly ILogger<PizzaController> _logger;
